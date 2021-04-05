@@ -41,5 +41,14 @@ class BookController extends Controller
       }
     }
 
+    function search(Request $req){
+
+        $keyword  = $req -> key;
+        $genere  = $req -> genere;
+
+        return book::where('book_title','Like',$keyword) -> orWhere('book_description','Like',$keyword) 
+        -> orWhere('genere','Like',$genere) -> get();
+    }
+
 
 }
