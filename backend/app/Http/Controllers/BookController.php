@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\book;
-
 class BookController extends Controller
 {
     function addBook(Request $req){
@@ -21,4 +20,26 @@ class BookController extends Controller
         return $req -> input();
 
     }
+
+    function allBooks(){
+
+        return book::all();
+    }
+
+    function borrowedBooks(){
+
+        return book::where('status','borrowed') -> get();
+    }
+
+    function borrow ( Request $req){
+       $bookID = $req -> id;
+       $user = $req -> uid;
+       $date  = date("Y/m/d");
+       $book = book::where('book_id', $bookID)->update(array('status' => 'borrowed','borrowed_by' => $user,'borrowed_date' => $date));
+      if($book){
+       return "success";
+      }
+    }
+
+
 }
