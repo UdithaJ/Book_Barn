@@ -26,6 +26,12 @@ class BookController extends Controller
         return book::all();
     }
 
+    function getoneBook(Request $req){
+        $bookID = $req -> id;
+        return book::where('book_id',$bookID) -> get();
+    }
+
+
     function borrowedBooks(){
 
         return book::where('status','borrowed') -> get();

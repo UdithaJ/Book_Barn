@@ -12,6 +12,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('addBook',[BookController::class,'addBook']);
 Route::get('books',[BookController::class,'allBooks']);
+Route::get('books/{id}',[BookController::class,'getoneBook']);
 Route::get('borrowedbooks',[BookController::class,'borrowedBooks']);
 Route::put('borrow/{id}/user/{uid}',[BookController::class,'borrow']);
 Route::get('search/{genere}/keyword/{key}',[BookController::class,'search']);
