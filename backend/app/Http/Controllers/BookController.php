@@ -15,7 +15,7 @@ class BookController extends Controller
         $book -> price = $req -> input('price');
         $book -> status = $req -> input('status');
         $book -> cover_image = $req -> file('cover_image') -> store('images');
-
+        $book -> genre = $req -> input('genre');
         $book -> save();
         return $req -> input();
 
@@ -47,7 +47,7 @@ class BookController extends Controller
         $genere  = $req -> genere;
 
         return book::where('book_title','Like',$keyword) -> orWhere('book_description','Like',$keyword) 
-        -> orWhere('genere','Like',$genere) -> get();
+        -> orWhere('genere','Like',$genere) -> get();// should be and
     }
 
 
