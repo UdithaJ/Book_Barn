@@ -5,13 +5,10 @@ body {
 }
 
 .title{
-
     color: #0f6674;
-
 }
 .float-left{
-    margin-left: 30px;
-
+    margin-left: 25px;
 }
 
 .bookWrap {
@@ -112,6 +109,53 @@ body {
 }
 
 
+.displayBook{
+    position: absolute;
+    left: 160px;
+    top: 100px;
+}
+
+.displayTitle{
+   position: relative;
+    left: 180px;
+    top: 50px;
+}
+
+.description{
+    position: relative;
+    left: 210px;
+    top: 50px;
+}
+
+textarea {
+    background-color: transparent;
+    border: none;
+}
 
 
-
+.borrowButton {
+    box-shadow: 0px 10px 14px -7px #276873;
+    background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+    background-color:#599bb3;
+    border-radius:8px;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    position: absolute;
+    top: 300px;
+    left: 630px;
+    font-family:Arial;
+    font-size:20px;
+    font-weight:bold;
+    padding:13px 32px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #3d768a;
+}
+.borrowButton:hover {
+    background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+    background-color:#408c99;
+}
+.borrowButton:active {
+    position:relative;
+    top:1px;
+}

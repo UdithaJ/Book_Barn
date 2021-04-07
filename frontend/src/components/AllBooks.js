@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
+
 
 function  AllBooks(){
 
@@ -17,9 +19,19 @@ function  AllBooks(){
     }, [])
 
         console.warn(books);
+
+
+    function displayBook(id){
+
+
+
+    }
+
+
+
     return(
         <div>
-            <h1>Book List</h1>
+            <h1>Book Rack</h1>
 
                 {
                     books.map((item) =>
@@ -27,7 +39,9 @@ function  AllBooks(){
 
                         <div className="bookWrap">
                             <div className="book">
-                                <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"/>
+                                <Link to ={"books/"+item.book_id} >
+                                <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"
+                               /></Link>
                                 <div className="spine"></div>
                             </div>
                         </div>
