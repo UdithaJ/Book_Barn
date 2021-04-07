@@ -1,9 +1,11 @@
 import React,{useState,useEffect} from "react";
-import axios from "axios";
+import axios from "axios"
 import { Link } from 'react-router-dom';
 
 
 function  AllBooks(){
+
+
 
     const [books, setBooks] = useState([]);
     useEffect(() => {
@@ -21,22 +23,15 @@ function  AllBooks(){
         console.warn(books);
 
 
-    function displayBook(id){
-
-
-
-    }
-
-
-
     return(
         <div>
             <h1>Book Rack</h1>
 
+
+
                 {
                     books.map((item) =>
                         <div className="float-left" >
-
                         <div className="bookWrap">
                             <div className="book">
                                 <Link to ={"books/"+item.book_id} >

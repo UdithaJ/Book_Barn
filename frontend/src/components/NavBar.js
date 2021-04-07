@@ -1,7 +1,19 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 
 function NavBar(){
+
+    let username = (localStorage.getItem('user-name'));
+    let userid = (localStorage.getItem('user-id'));
+    const  history = useHistory();
+
+    function logout(){
+        localStorage.clear();
+        history.push("/login")
+
+    }
+
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="#">Book Barn</a>
@@ -30,6 +42,24 @@ function NavBar(){
                             <a className="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/signup">Sign Up</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/login">Login</a>
+                    </li>
+
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {username}
+                        </a>
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a className="dropdown-item" onClick={logout}>Logout</a>
+                        </div>
+                    </li>
+
+
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>

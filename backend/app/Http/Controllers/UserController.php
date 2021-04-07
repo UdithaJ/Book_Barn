@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -15,6 +16,23 @@ class UserController extends Controller
         $user -> password = Hash::make($req -> input("password"));
         $user -> save();
         return $req -> input();
+    }
+
+    function login(Request $req){
+
+        $user = User::where('email',$req -> email) -> first();
+        if(!$user || !Hash::check($req -> password, $user -> password)){
+
+            $req -> session() -> put('loggeduser', $user['id']);
+
+            return response()->json(["status" => "failed"]);
+
+        }
+
+           return response()->json(["status" =>"valid", "success" => true, "user" => $user]);
+
+
+
     }
 
 }

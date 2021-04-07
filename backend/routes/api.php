@@ -18,3 +18,4 @@ Route::get('borrowedbooks',[BookController::class,'borrowedBooks']);
 Route::put('borrow/{id}/user/{uid}',[BookController::class,'borrow']);
 Route::get('search/{genere}/keyword/{key}',[BookController::class,'search']);
 Route::post('signup',[UserController::class,'register']);
+Route::post('login',[UserController::class,'login']);
