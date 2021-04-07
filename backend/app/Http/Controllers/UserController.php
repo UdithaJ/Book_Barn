@@ -23,8 +23,6 @@ class UserController extends Controller
         $user = User::where('email',$req -> email) -> first();
         if(!$user || !Hash::check($req -> password, $user -> password)){
 
-            $req -> session() -> put('loggeduser', $user['id']);
-
             return response()->json(["status" => "failed"]);
 
         }

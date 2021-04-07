@@ -4,11 +4,9 @@ import { Link } from 'react-router-dom';
 import NavBar from "./NavBar";
 
 
-function  AllBooks(){
+function  ManageBooks(){
 
-
-
-    const [books, setBooks] = useState([]);
+    const [borrowedbooks, setBooks] = useState([]);
     useEffect(() => {
         const getBooks = () => {
             let result = axios.get("http://localhost:8000/api/books").then((res) => {
@@ -21,7 +19,7 @@ function  AllBooks(){
 
     }, [])
 
-        console.warn(books);
+
 
 
     return(
@@ -31,25 +29,25 @@ function  AllBooks(){
 
 
 
-                {
-                    books.map((item) =>
-                        <div className="float-left" >
+            {
+                borrowedbooks.map((item) =>
+                    <div className="float-left" >
                         <div className="bookWrap">
                             <div className="book">
-                                <Link to ={"books/"+item.book_id}>
-                                <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"
-                               /></Link>
+                                <Link to ={"viewbook/"+item.book_id}>
+                                    <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"
+                                    /></Link>
                                 <div className="spine"></div>
                             </div>
                         </div>
-                            <div className="title">
-                                <h6>{item.book_title} </h6>
-                                <p>by {item.author}</p>
-                            </div>
+                        <div className="title">
+                            <h6>{item.book_title} </h6>
+                            <p>by {item.author}</p>
                         </div>
+                    </div>
 
-                    )
-                }
+                )
+            }
 
         </div>
 
@@ -57,4 +55,4 @@ function  AllBooks(){
 
 }
 
-export default AllBooks;
+export default ManageBooks;

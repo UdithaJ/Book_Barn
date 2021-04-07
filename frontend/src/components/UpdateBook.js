@@ -3,7 +3,7 @@ import axios from "axios";
 import {Link, withRouter} from "react-router-dom";
 import NavBar from "./NavBar";
 
-function Book(props){
+function UpdateBook(props){
 
     const [book, setBook] = useState([]);
     useEffect(() => {
@@ -18,31 +18,6 @@ function Book(props){
 
     }, [])
 
-    const id = props.match.params.id;
-    const uid = (localStorage.getItem('user-id'));
-
-
-    function borrowBook(e) {
-        e.preventDefault();
-
-        const formData = new FormData();
-
-        formData.append("id",id);
-        formData.append("uid",uid);
-
-        console.log(id);
-        console.log(uid);
-
-        axios.post("http://localhost:8000/api/borrow",formData).then(() => {
-            alert("book borrowed");
-        }).catch((err) => {
-            alert(err);
-        })
-
-
-    }
-
-
 
     return(
         <div>
@@ -53,7 +28,7 @@ function Book(props){
 
                     <div className="singleView" >
                         <div className="displayTitle">
-                        <h2>{item.book_title}</h2>
+                            <h2>{item.book_title}</h2>
                             <p>by {item.author}</p>
                         </div>
                         <div><br/><br/></div>
@@ -61,16 +36,31 @@ function Book(props){
                             <textarea disabled={true}  rows="4" cols="80">{item.book_description}
                             </textarea>
 
-                           <form onSubmit={borrowBook}>
-                               <button type="submit" className="btn btn-primary">Borrow</button>
-                           </form>
+                            <Link to ={"books/update/"+item.book_id}>
+
+                                <button type="button" className="btn btn-warning">Update</button>
+
+                            </Link>
+
+                            <Link to ={"books/delete/"+item.book_id}>
+
+                                <button type="button" className="btn btn-danger">Delete</button>
+
+                            </Link>
+
+                            <Link to ={"books/return/"+item.book_id}>
+
+                                <button type="button" className="btn btn-success">Mark as returned</button>
+
+                            </Link>
+
                         </div>
                         <div className="displayBook">
-                        <img src={"http://localhost:8000/"+item.cover_image} width="300" height="450"/>
-                        <div>
-                           <br/>
-                        </div>
-                        <h6>price: {item.price} /=</h6>
+                            <img src={"http://localhost:8000/"+item.cover_image} width="300" height="450"/>
+                            <div>
+                                <br/>
+                            </div>
+                            <h6>price: {item.price} /=</h6>
                         </div>
 
 
@@ -90,4 +80,4 @@ function Book(props){
 
 }
 
-export default Book;
+export default UpdateBook;

@@ -38,14 +38,15 @@ class BookController extends Controller
     }
 
     function borrow ( Request $req){
-       $bookID = $req -> id;
-       $user = $req -> uid;
+       $bookID =  $req -> input('id');
+       $user =  $req -> input('uid');
        $date  = date("Y/m/d");
        $book = book::where('book_id', $bookID)->update(array('status' => 'borrowed','borrowed_by' => $user,'borrowed_date' => $date));
       if($book){
        return "success";
       }
     }
+
 
     function search(Request $req){
 
@@ -56,5 +57,39 @@ class BookController extends Controller
         -> orWhere('genere','Like',$genere) -> get();// should be and
     }
 
+
+
+    function return( Request $req){
+        $bookID =  $req -> id;
+        $book = book::where('book_id', $bookID)->update(array('status' => 'available','borrowed_by' => null,'borrowed_date' => null));
+       if($book){
+        return "success";
+       }
+     }
+
+     function delete( Request $req){
+        $bookID =  $req -> id;
+        $book = book::where('book_id', $bookID)-> delete();
+       if($book){
+        return "success";
+       }
+     }
+
+     function update( Request $req){
+        $bookID =  $req -> input('id');
+        $book_title = $req -> input('book_title');
+        $bookDescriotion =  $req -> input('book_description');
+        $author =  $req -> input('author');
+        $price =  $req -> input('price');
+        $status =  $req -> input('status');
+        $cover_image =  $req -> file('cover_image') -> store('images');
+        $genre = $req -> input('genre');
+
+        $book = book::where('book_id', $bookID)->update(array('bookt_title' => $book_title,'book_description' => $bookDescriotion,'author' => $author,'price' => $price
+        ,'status' => $status,'cover_image' => $cover_image,'genre' => $genre));
+       if($book){
+        return "success";
+       }
+     }
 
 }

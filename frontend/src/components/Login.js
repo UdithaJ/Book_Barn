@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {useHistory} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+import NavBar from "./NavBar";
 
 
 function Login(){
@@ -40,8 +41,10 @@ function validate(e) {
 }
 
 return(
-
+<div>
+    <NavBar/>
     <div className="col-sm-6 offset-sm-3">
+
         <form onSubmit={validate}>
 
 
@@ -59,6 +62,7 @@ return(
             <button type="submit" className="btn btn-primary">Login</button>
         </form>
     </div>
+</div>
 )
 
 }
