@@ -9,12 +9,13 @@ import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import ManageBooks from "./components/ManageBooks";
 import UpdateBook from "./components/UpdateBook";
+import BookRack from "./components/BookRack";
 
 function App() {
   return (
       <Router>
     <div className="App">
-        <Route path = "/" exact component = {AllBooks}/>
+        <Route path = "/" exact component = {BookRack}/>
         <Route path = "/add" exact component = {AddBook}/>
         <Route path = "/books/:id" exact component = {Book}/>
         <Route path = "/signup" exact component = {SignUp}/>
@@ -22,7 +23,6 @@ function App() {
         <Route path = "/borrowedbooks" exact component = {ManageBooks}/>
         <Route path = "/viewbook/:id" exact component = {UpdateBook}/>
 
-     
     </div>
       </Router>
   );

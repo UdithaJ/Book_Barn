@@ -12,7 +12,7 @@ function  AllBooks(){
     useEffect(() => {
         const getBooks = () => {
             let result = axios.get("http://localhost:8000/api/books").then((res) => {
-                setBooks(res.data);
+                setBooks(res.data.data);
             }).catch((err) => {
                 console.log(err);
             })

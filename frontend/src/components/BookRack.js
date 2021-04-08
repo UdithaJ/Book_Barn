@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import NavBar from "./NavBar";
 import Pagination from "react-js-pagination";
 
-class ManageBooks extends Component{
+class BookRack extends Component{
 
     constructor() {
         super();
@@ -74,7 +74,7 @@ class ManageBooks extends Component{
                         <div className="float-left" >
                             <div className="bookWrap">
                                 <div className="book">
-                                    <Link to ={"viewbook/"+item.book_id}>
+                                    <Link to ={"books/"+item.book_id}>
                                         <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"
                                         /></Link>
                                     <div className="spine"></div>
@@ -102,4 +102,4 @@ class ManageBooks extends Component{
 
 
 }
-export default ManageBooks;
+export default BookRack;

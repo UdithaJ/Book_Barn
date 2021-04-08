@@ -23,7 +23,7 @@ class BookController extends Controller
 
     function allBooks(){
 
-        return book::all();
+        return book::paginate(4);
     }
 
     function getoneBook(Request $req){
@@ -76,20 +76,31 @@ class BookController extends Controller
      }
 
      function update( Request $req){
-        $bookID =  $req -> input('id');
+        $bookID =  $req -> id;
         $book_title = $req -> input('book_title');
         $bookDescriotion =  $req -> input('book_description');
         $author =  $req -> input('author');
         $price =  $req -> input('price');
         $status =  $req -> input('status');
-        $cover_image =  $req -> file('cover_image') -> store('images');
+        $cover_image =  $req -> file('cover_image');
         $genre = $req -> input('genre');
 
-        $book = book::where('book_id', $bookID)->update(array('bookt_title' => $book_title,'book_description' => $bookDescriotion,'author' => $author,'price' => $price
-        ,'status' => $status,'cover_image' => $cover_image,'genre' => $genre));
+        if($cover_image){
+            $cover_image =  $req -> file('cover_image') -> store('images');
+            $book = book::where('book_id', $bookID)->update(array('book_title' => $book_title,'book_description' => $bookDescriotion,'author' => $author,'price' => $price
+            ,'status' => $status,'cover_image' => $cover_image,'genre' => $genre));
+        }
+
+        else{
+            $book = book::where('book_id', $bookID)->update(array('book_title' => $book_title,'book_description' => $bookDescriotion,'author' => $author,'price' => $price
+            ,'status' => $status,'genre' => $genre));
+
+        }
+       
        if($book){
         return "success";
        }
+    
      }
 
 }

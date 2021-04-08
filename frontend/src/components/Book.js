@@ -10,6 +10,10 @@ function Book(props){
         const getBook = () => {
             let result = axios.get("http://localhost:8000/api/books/"+props.match.params.id).then((res) => {
                 setBook(res.data);
+               // console.log(res.data[0].borrowed_date);
+                if (res.data[0].status === "borrowed"){
+                    alert("borrowed");
+                }
             }).catch((err) => {
                 console.log(err);
             })
@@ -75,8 +79,6 @@ function Book(props){
 
 
                     </div>
-
-
 
 
                 )
