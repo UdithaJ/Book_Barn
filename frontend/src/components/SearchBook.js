@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import NavBar from "./NavBar";
 import Pagination from "react-js-pagination";
 
-class BookRack extends Component{
+class SearchBook extends Component{
 
     constructor(props) {
         super(props);
+
         this.state = {
 
             books: [],
@@ -15,21 +16,46 @@ class BookRack extends Component{
             itemsCountPerPage: 1,
             totalItemsCount: 1,
             pageRangeDisplayed:3,
+            key:"",
+            genre:""
         }
+        this.onChangeKey = this.onChangeKey.bind(this);
+        this.onChangeGenre = this.onChangeGenre.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
+
+    }
+
+    onChangeKey(e){
+        this.setState({key:e.target.value
+        });
+        axios.get("http://localhost:8000/api/books/search/"+e.target.value).then((res) => {
+            console.log(this.state.key);
+            console.log(res.data.data);
+            this.setState({books:res.data.data});
+        }).catch((err) => {
+            console.log(err);
+        })
+
+    }
+
+    onChangeGenre(e){
+        this.setState({genre:e.target.value
+        });
+        axios.get("http://localhost:8000/api/books/sort/"+e.target.value).then((res) => {
+            console.log(this.state.genre);
+            console.log(res.data.data);
+            this.setState({books:res.data.data});
+        }).catch((err) => {
+            console.log(err);
+        })
 
     }
 
     componentDidMount() {
 
-        axios.get("http://localhost:8000/api/books").then((res) => {
-            console.log(res.data.data);
-            this.setState({books:res.data.data}
-            );
-        }).catch((err) => {
-            console.log(err);
-        })
     }
+
+
 
     handlePageChange(pageNumber) {
         console.log(`active page is ${pageNumber}`);
@@ -48,20 +74,9 @@ class BookRack extends Component{
         })
     }
 
-    sortBooks() {
-        axios.post("http://localhost:8000/api/books?page="+this.state.sortKey).then((res) => {
 
-            console.log(res.data.data);
-            this.setState({
-                books:res.data.data,
-                itemsCountPerPage:res.data.per_page,
-                totalItemCount: res.data.total,
-                activePage:res.data.current_page
-            });
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
+
+
 
 
     render() {
@@ -69,8 +84,22 @@ class BookRack extends Component{
         return(
             <div>
 
-                <NavBar/>
+                <div>
+                    <form>
 
+                        <input type="text" onChange={this.onChangeKey}/>
+                        <select onChange={this.onChangeGenre} value="Sort">
+                            <option value="All">All</option>
+                            <option value="all">all</option>
+                            <option value="children">children</option>
+                        </select>
+
+                    </form>
+
+
+                </div>
+
+                <NavBar/>
                 <div className="d-flex justify-content-center">
                     <Pagination
                         activePage={this.state.activePage}
@@ -118,4 +147,4 @@ class BookRack extends Component{
 
 
 }
-export default BookRack;
+export default SearchBook;

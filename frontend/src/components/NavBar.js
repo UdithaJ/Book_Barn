@@ -61,6 +61,10 @@ function NavBar(){
                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a className="dropdown-item" onClick={logout}>Logout</a>
                         </div>
+
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/search">Search Books</a>
                     </li>
 
 

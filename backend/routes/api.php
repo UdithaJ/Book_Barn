@@ -16,7 +16,8 @@ Route::get('books',[BookController::class,'allBooks']);
 Route::get('books/{id}',[BookController::class,'getoneBook']);
 Route::get('borrowedbooks',[BookController::class,'borrowedBooks']);
 Route::post('borrow',[BookController::class,'borrow']);
-Route::get('search/{genere}/keyword/{key}',[BookController::class,'search']);
+Route::get('books/search/{key}',[BookController::class,'search']);
+Route::get('books/sort/{type}',[BookController::class,'sort']);
 Route::post('signup',[UserController::class,'register']);
 Route::post('login',[UserController::class,'login']);
 

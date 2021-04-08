@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import ManageBooks from "./components/ManageBooks";
 import UpdateBook from "./components/UpdateBook";
 import BookRack from "./components/BookRack";
+import SearchBook from "./components/SearchBook";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path = "/login" exact component = {Login}/>
         <Route path = "/borrowedbooks" exact component = {ManageBooks}/>
         <Route path = "/viewbook/:id" exact component = {UpdateBook}/>
+        <Route path = "/search" exact component = {SearchBook}/>
 
     </div>
       </Router>
