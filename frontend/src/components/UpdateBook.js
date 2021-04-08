@@ -45,7 +45,6 @@ function UpdateBook(props){
         formData.append("cover_image",cover_image);
         formData.append("price",price);
 
-        console.log(cover_image);
 
         axios.post("http://localhost:8000/api/books/update/"+id,formData).then(() => {
             alert("book Updated");

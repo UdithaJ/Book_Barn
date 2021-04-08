@@ -16,7 +16,7 @@ class SearchBook extends Component{
             itemsCountPerPage: 1,
             totalItemsCount: 1,
             pageRangeDisplayed:3,
-            key:"",
+            key:"the",
             genre:""
         }
         this.onChangeKey = this.onChangeKey.bind(this);
@@ -25,13 +25,14 @@ class SearchBook extends Component{
 
     }
 
-    onChangeKey(e){
-        this.setState({key:e.target.value
-        });
-        axios.get("http://localhost:8000/api/books/search/"+e.target.value).then((res) => {
-            console.log(this.state.key);
-            console.log(res.data.data);
-            this.setState({books:res.data.data});
+    async onChangeKey(e){
+         await this.setState({key:e.target.value});
+         axios.get("http://localhost:8000/api/books/search/"+this.state.key).then((res) => {
+             console.log(res.data.data);
+             if(res.data.data.length ) {
+                 this.setState({books: res.data.data});
+             }
+
         }).catch((err) => {
             console.log(err);
         })
@@ -52,6 +53,15 @@ class SearchBook extends Component{
     }
 
     componentDidMount() {
+
+
+        axios.get("http://localhost:8000/api/books").then((res) => {
+            console.log(res.data.data);
+            this.setState({books:res.data.data}
+            );
+        }).catch((err) => {
+            console.log(err);
+        })
 
     }
 
@@ -115,6 +125,7 @@ class SearchBook extends Component{
 
 
                 {
+
                     this.state.books.map((item) =>
                         <div className="float-left" >
                             <div className="bookWrap">

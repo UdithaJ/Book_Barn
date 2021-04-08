@@ -52,8 +52,8 @@ class BookController extends Controller
 
         $keyword  = $req -> key;
     
-        return book::where('book_title','Like',$keyword) -> 
-        orWhere('book_description','Like',$keyword) -> simplePaginate(4);
+        return book::where('book_title','Like',"%$keyword%") -> 
+        orWhere('book_description','Like',"%$keyword%") -> simplePaginate(4);
     }
 
     function sort(Request $req){
