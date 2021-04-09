@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import axios from "axios";
+import NavBar from "./NavBar";
 
 function SignUp(){
 
@@ -26,28 +27,32 @@ function SignUp(){
     }
 
     return(
+        <div>
 
-        <div className="col-sm-6 offset-sm-3">
+            <NavBar/>
+
+        <div className="signup">
             <form onSubmit={sendUser}>
 
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">User Name</label>
-                    <input type="text" className="form-control" name="username" placeholder="User name" onChange={(e) => {setName(e.target.value)}}/>
+                    <input type="text" required="true" className="form-control" name="username" placeholder="User name" onChange={(e) => {setName(e.target.value)}}/>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Email</label>
-                    <input type="text" className="form-control" name="email" placeholder="Email" onChange={(e) =>{setEmail(e.target.value)}}/>
+                    <input type="text" required="true"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" className="form-control" name="email" placeholder="Email" onChange={(e) =>{setEmail(e.target.value)}}/>
                 </div>
 
 
                 <div className="form-group">
                     <label htmlFor="exampleInputPassword1">Password</label>
-                    <input type="password" className="form-control" name="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
+                    <input type="password" required="true"  className="form-control" name="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
                 </div>
 
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary">Sign Up</button>
             </form>
+        </div>
         </div>
     )
 }

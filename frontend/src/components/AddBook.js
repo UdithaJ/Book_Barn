@@ -79,17 +79,19 @@ function AddBook(){
 
                 <div className="form-group">
                     <label className="float-left">Title</label>
-                    <input type="text" className="form-control" name="title" placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}/>
+                    <input type="text" required="true" className="form-control" name="title" placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}/>
                 </div>
 
                 <div className="form-group">
                     <label className="float-left">Description</label>
-                    <input type="text" className="form-control" name="description" placeholder="Description" onChange={(e) =>{setDescription(e.target.value)}}/>
+                    <textarea maxLength="300" className="form-control" onChange={(e) =>{setDescription(e.target.value)}} rows="4" cols="80"/>
+
+
                 </div>
 
                 <div className="form-group">
                     <label className="float-left">Author</label>
-                    <input type="text" className="form-control" name="author" placeholder="Author" onChange={(e) => {setAuthor(e.target.value)}}/>
+                    <input type="text"  required="true" className="form-control" name="author" placeholder="Author" onChange={(e) => {setAuthor(e.target.value)}}/>
                 </div>
                 <div> <br/></div>
 
@@ -98,7 +100,7 @@ function AddBook(){
                     <div className="input-group-prepend">
                         <label className="input-group-text" htmlFor="inputGroupSelect01">Genre</label>
                     </div>
-                    <select className="custom-select" id="inputGroupSelect01" onChange={(e) => {setGenre(e.target.value)}}>
+                    <select className="custom-select" required="true" id="inputGroupSelect01" onChange={(e) => {setGenre(e.target.value)}}>
                         <option selected>Choose...</option>
                         <option value="Fiction">Fiction</option>
                         <option value="Children's">Children's</option>
@@ -114,7 +116,7 @@ function AddBook(){
 
                 <div className="form-group">
                     <label className="float-left">Price</label>
-                    <input type="text" className="form-control" name="price" placeholder="Price" onChange={(e) => {setPrice(e.target.value)}}/>
+                    <input type="text" required="true" className="form-control" name="price" placeholder="Price" onChange={(e) => {setPrice(e.target.value)}}/>
                 </div>
 
                 <button type="submit" className="btn btn-primary">Add to Rack</button>

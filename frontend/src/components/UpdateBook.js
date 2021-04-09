@@ -160,7 +160,7 @@ function UpdateBook(props){
 
                             <div className="form-group">
                                 <label htmlFor="exampleInputEmail1">Title</label>
-                                <input type="text" className="form-control" defaultValue={item.book_title} placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}/>
+                                <input type="text" required="true" className="form-control" defaultValue={item.book_title} placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}/>
                             </div>
 
                             <div className="form-group">
@@ -170,16 +170,16 @@ function UpdateBook(props){
 
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Author</label>
-                                <input type="text" className="form-control" defaultValue={item.author} placeholder="Author" onChange={(e) => {setAuthor(e.target.value)}}/>
+                                <input type="text" required="true" className="form-control" defaultValue={item.author} placeholder="Author" onChange={(e) => {setAuthor(e.target.value)}}/>
                             </div>
 
                             <div> <br/></div>
-                            
+
                             <div className="input-group mb-3">
                                 <div className="input-group-prepend">
-                                    <label className="input-group-text" htmlFor="inputGroupSelect01">Genre</label>
+                                    <label className="input-group-text"  htmlFor="inputGroupSelect01">Genre</label>
                                 </div>
-                                <select className="custom-select" id="inputGroupSelect01" onChange={(e) => {setGenre(e.target.value)}}>
+                                <select className="custom-select" required="true" id="inputGroupSelect01" onChange={(e) => {setGenre(e.target.value)}}>
                                     <option selected>Choose...</option>
                                     <option value="Fiction">Fiction</option>
                                     <option value="Children's">Children's</option>
@@ -196,7 +196,7 @@ function UpdateBook(props){
 
                             <div className="form-group">
                                 <label htmlFor="exampleInputPassword1">Price</label>
-                                <input type="text" className="form-control" defaultValue={item.price} placeholder="Price" onChange={(e) => {setPrice(e.target.value)}}/>
+                                <input type="text" required="true" className="form-control" defaultValue={item.price} placeholder="Price" onChange={(e) => {setPrice(e.target.value)}}/>
                             </div>
 
 

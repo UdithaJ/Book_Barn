@@ -90,8 +90,10 @@ function Book(props){
                         </div>
                         <div><br/><br/></div>
                         <div className="description">
-                            <textarea disabled={true}  rows="4" cols="80">{item.book_description}
+                            <div className="showDescription">
+                            <textarea disabled={true} className="form-control" style={{backgroundColor:"transparent"}}   rows="4" cols="80">{item.book_description}
                             </textarea>
+                            </div>
 
                            <form onSubmit={borrowBook}>
                                <button id="BtnBorrow" disabled={isDisabled()} type="submit" className="btn btn-primary">Borrow</button>

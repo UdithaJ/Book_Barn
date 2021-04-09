@@ -117,7 +117,7 @@ class ManageBooks extends Component{
 
 
                 </div>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center" style={{marginTop:"10px"}}>
                     <Pagination
                         activePage={this.state.activePage}
                         itemsCountPerPage={this.state.itemsCountPerPage}
@@ -137,7 +137,7 @@ class ManageBooks extends Component{
                         <div className="float-left" >
                             <div className="bookWrap">
                                 <div className="book">
-                                    <Link to ={"viewbook/"+item.book_id}>
+                                    <Link to ={"/viewbook/"+item.book_id}>
                                         <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"
                                         /></Link>
                                     <div className="spine"></div>

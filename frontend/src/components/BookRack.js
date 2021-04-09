@@ -116,7 +116,8 @@ class BookRack extends Component{
 
 
                 </div>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center" style={{marginTop:"10px"}}>
+
                     <Pagination
                         activePage={this.state.activePage}
                         itemsCountPerPage={this.state.itemsCountPerPage}

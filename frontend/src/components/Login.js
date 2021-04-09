@@ -68,27 +68,10 @@ function validate(e) {
 return(
 <div>
     <NavBar/>
-    <div className="col-sm-6 offset-sm-3">
 
-        <form onSubmit={validate}>
-
-
-            <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Email</label>
-                <input type="text" className="form-control" name="email" placeholder="Email" onChange={(e) =>{setEmail(e.target.value)}}/>
-            </div>
-
-
-            <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input type="password" className="form-control" name="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
-            </div>
-
-            <button type="submit" className="btn btn-primary">Login</button>
-        </form>
-
+    <div className="adminLogin" style={{marginTop:"100px"}}>
+        <h1>Admin Login</h1>
         <form onSubmit={adminLogin}>
-
 
             <div className="form-group">
                 <label htmlFor="exampleInputPassword1">Username</label>
@@ -103,6 +86,28 @@ return(
 
             <button type="submit" className="btn btn-primary">Login</button>
         </form>
+    </div>
+
+
+
+    <div className="userLogin" style={{marginTop:"100px"}}>
+        <h1>User Login</h1>
+            <form onSubmit={validate}>
+
+                <div className="form-group">
+                    <label htmlFor="exampleInputPassword1">Email</label>
+                    <input type="text" className="form-control" name="email" placeholder="Email" onChange={(e) =>{setEmail(e.target.value)}}/>
+                </div>
+
+
+                <div className="form-group">
+                    <label htmlFor="exampleInputPassword1">Password</label>
+                    <input type="password" className="form-control" name="password" placeholder="Password" onChange={(e) => {setPassword(e.target.value)}}/>
+                </div>
+
+                <button type="submit" className="btn btn-primary">Login</button>
+            </form>
+
     </div>
 </div>
 )

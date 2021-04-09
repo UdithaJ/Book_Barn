@@ -129,7 +129,7 @@ body {
 
 textarea {
     background-color: transparent;
-    border: none;
+
 }
 
 
@@ -197,3 +197,33 @@ textarea {
 
 }
 
+.showDescription{
+    position: absolute;
+    top: 50px;
+    left: 400px;
+}
+
+.signup{
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 400px;
+}
+
+.adminLogin{
+    position: absolute;
+    top: 100px;
+    left: 500px;
+    right: 0;
+    width: 350px;
+    margin: auto;
+}
+.userLogin{
+    position: absolute;
+    top: 100px;
+    left: 250px;
+    width: 350px;
+    margin: auto;
+}
