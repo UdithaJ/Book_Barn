@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import NavBar from "./NavBar";
 
 
+
 function Login(){
 
 const [email, setEmail] = useState("");
@@ -67,6 +68,7 @@ function validate(e) {
 
 return(
 <div>
+
     <NavBar/>
 
     <div className="adminLogin" style={{marginTop:"100px"}}>
