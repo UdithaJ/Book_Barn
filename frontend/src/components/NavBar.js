@@ -6,7 +6,20 @@ function NavBar(){
 
     let username = (localStorage.getItem('user-name'));
     let userid = (localStorage.getItem('user-id'));
+    const [display,setDisplay] = useState("");
     const  history = useHistory();
+
+
+
+useEffect(() => {
+    if(username != null){
+
+        setDisplay("none")
+
+    }
+
+})
+
 
     function logout(){
         localStorage.clear();
@@ -34,7 +47,7 @@ function NavBar(){
                         <a className="nav-link" href="/signup">Sign Up</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/login">Login</a>
+                        <a className="nav-link" style={{display:display }} href="/login">Login</a>
                     </li>
 
 
@@ -42,9 +55,6 @@ function NavBar(){
                         <a className="nav-link" href="/mybooks">My Books</a>
                     </li>
 
-                    <li className="nav-item">
-                        <a className="nav-link" href="/search">Search Books</a>
-                    </li>
 
                     <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

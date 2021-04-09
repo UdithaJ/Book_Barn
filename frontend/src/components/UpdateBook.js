@@ -51,8 +51,16 @@ function UpdateBook(props){
         formData.append("price",price);
 
 
-        axios.post("http://localhost:8000/api/books/update/"+id,formData).then(() => {
-            alert("book Updated");
+        axios.post("http://localhost:8000/api/books/update/"+id,formData).then((res) => {
+            if(res.data.status === "success") {
+                alert("Book updated")
+                history.push("/borrowedbooks");
+            }
+
+            else{
+
+                alert("Something went Wrong!")
+            }
         }).catch((err) => {
             alert(err);
         })
@@ -62,8 +70,16 @@ function UpdateBook(props){
 
     function Delete(e) {
 
-        axios.delete("http://localhost:8000/api/books/delete/"+id).then(() => {
-            alert("book Deleted");
+        axios.delete("http://localhost:8000/api/books/delete/"+id).then((res) => {
+
+            if(res.data.status === "success") {
+                history.push("/borrowedbooks");
+            }
+
+            else{
+
+                alert("Something went Wrong!")
+            }
         }).catch((err) => {
             alert(err);
         })
@@ -77,7 +93,7 @@ function UpdateBook(props){
             history.push("/borrowedbooks")
                 }
             else {
-
+                alert("Something went Wrong!")
             }
         }).catch((err) => {
             alert(err);
@@ -127,17 +143,19 @@ function UpdateBook(props){
             {
                 book.map((item) =>
 
-                    <div className="col-sm-6 offset-sm-3">
+                    <div className="col-sm-6 offset-sm-5">
+
+                        <div className="bookForm">
 
                         <form onSubmit={update}>
 
-                            <div className="bookWrap">
+                            <div className="oldCover">
                                 <div className="book">
                                     <Link to ={"books/"+item.book_id}>
-                                        <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"
-                                        /></Link>
-                                    <div className="spine"></div>
+                                        <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="300" height="430"/>
+                                    </Link>
                                 </div>
+
                             </div>
 
                             <div className="form-group">
@@ -155,15 +173,24 @@ function UpdateBook(props){
                                 <input type="text" className="form-control" defaultValue={item.author} placeholder="Author" onChange={(e) => {setAuthor(e.target.value)}}/>
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Genre</label>
-                                <input type="text" className="form-control" defaultValue={item.genre} placeholder="Genre" onChange={(e) => {setGenre(e.target.value)}}/>
+                            <div> <br/></div>
+                            
+                            <div className="input-group mb-3">
+                                <div className="input-group-prepend">
+                                    <label className="input-group-text" htmlFor="inputGroupSelect01">Genre</label>
+                                </div>
+                                <select className="custom-select" id="inputGroupSelect01" onChange={(e) => {setGenre(e.target.value)}}>
+                                    <option selected>Choose...</option>
+                                    <option value="Fiction">Fiction</option>
+                                    <option value="Children's">Children's</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Novel">Novel</option>
+                                    <option value="Translations">Translations</option>
+                                </select>
                             </div>
 
-                            <div className="form-group">
-                                <label htmlFor="exampleInputPassword1">Cover Image</label>
+                            <div className="fileInput">
                                 <input type="file" className="form-control" name="cover" placeholder="Cover Image" onChange={onSelectFile}/>
-                                {selectedFile &&  <img src={preview} /> }
                             </div>
 
 
@@ -172,15 +199,24 @@ function UpdateBook(props){
                                 <input type="text" className="form-control" defaultValue={item.price} placeholder="Price" onChange={(e) => {setPrice(e.target.value)}}/>
                             </div>
 
-                            <button type="submit" className="btn btn-primary">Update</button>
 
-                            <button type="button"  onClick={Delete} className="btn btn-danger">Delete</button>
+                            <button type="submit" style={{marginRight:"15px"}} className="btn btn-warning">Update</button>
 
-                            <button type="button" disabled={isDisabled()} onClick={Return} className="btn btn-primary">Mark as Returned</button>
+                            <button type="button" style={{marginRight:"15px"}}  onClick={Delete} className="btn btn-danger">Delete</button>
+
+                            <button type="button" style={{marginRight:"15px"}} disabled={isDisabled()} onClick={Return} className="btn btn-primary">Mark as Returned</button>
+
 
                             <div className="spine"></div>
                         </form>
-
+                        </div>
+                        <div className="newCover">
+                            {selectedFile &&  <div className="book">
+                                <Link to ={"books/"+item.book_id}>
+                                    <img className="cover" src={preview} width="300" height="430"/>
+                                </Link>
+                            </div> }
+                        </div>
 
                     </div>
 

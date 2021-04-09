@@ -6,6 +6,7 @@ function AdminNavBar(){
 
     let username = (localStorage.getItem('user-name'));
     let userid = (localStorage.getItem('user-id'));
+    const [display,setDisplay] = useState("");
     const  history = useHistory();
 
     function logout(){
@@ -13,6 +14,15 @@ function AdminNavBar(){
         history.push("/login")
 
     }
+
+    useEffect(() => {
+        if(username != null){
+
+            setDisplay("none")
+
+        }
+
+    })
 
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,7 +46,7 @@ function AdminNavBar(){
                         <a className="nav-link" href="/signup">Sign Up</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/login">Login</a>
+                        <a className="nav-link" style={{display:display }} href="/login">Login</a>
                     </li>
 
 

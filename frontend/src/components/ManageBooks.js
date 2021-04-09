@@ -4,33 +4,69 @@ import { Link } from 'react-router-dom';
 import NavBar from "./NavBar";
 import Pagination from "react-js-pagination";
 import AdminNavBar from "./AdminNavBar";
-import SearchBook from "./SearchBook";
 
 class ManageBooks extends Component{
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
 
             books: [],
             activePage: 1,
             itemsCountPerPage: 1,
             totalItemsCount: 1,
-            pageRangeDisplayed:3
+            pageRangeDisplayed:3,
+            key:"the",
+            genre:""
         }
+        this.onChangeKey = this.onChangeKey.bind(this);
+        this.onChangeGenre = this.onChangeGenre.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
+
+    }
+
+    async onChangeKey(e){
+        await this.setState({key:e.target.value});
+        axios.get("http://localhost:8000/api/books/search/"+this.state.key).then((res) => {
+            console.log(res.data.data);
+            if(res.data.data.length ) {
+                this.setState({books: res.data.data});
+            }
+
+        }).catch((err) => {
+            console.log(err);
+        })
+
+    }
+
+    onChangeGenre(e){
+        this.setState({genre:e.target.value
+        });
+        axios.get("http://localhost:8000/api/books/sort/"+e.target.value).then((res) => {
+            console.log(this.state.genre);
+            console.log(res.data.data);
+            this.setState({books:res.data.data});
+        }).catch((err) => {
+            console.log(err);
+        })
 
     }
 
     componentDidMount() {
 
+
         axios.get("http://localhost:8000/api/books").then((res) => {
+            console.log(res.data.data);
             this.setState({books:res.data.data}
             );
         }).catch((err) => {
             console.log(err);
         })
+
     }
+
+
 
     handlePageChange(pageNumber) {
         console.log(`active page is ${pageNumber}`);
@@ -50,13 +86,37 @@ class ManageBooks extends Component{
     }
 
 
+
+
+
+
     render() {
 
         return(
             <div>
 
+
                 <AdminNavBar/>
 
+                <div>
+
+                    <div className="sort">
+                        <select className="custom-select" id="inputGroupSelect01" style={{width: "250px"}} onChange={this.onChangeGenre}>
+                            <option selected>Genre</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Children's">Children's</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Novel">Novel</option>
+                            <option value="Translations">Translations</option>
+                        </select>
+                    </div>
+
+                    <div className="search">
+                        <input type="text" placeholder="Type anything to Search" style={{width: "400px"}} className="form-control" onChange={this.onChangeKey}/>
+                    </div>
+
+
+                </div>
                 <div className="d-flex justify-content-center">
                     <Pagination
                         activePage={this.state.activePage}
@@ -72,6 +132,7 @@ class ManageBooks extends Component{
 
 
                 {
+
                     this.state.books.map((item) =>
                         <div className="float-left" >
                             <div className="bookWrap">

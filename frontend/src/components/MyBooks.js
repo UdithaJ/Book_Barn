@@ -43,6 +43,9 @@ function  MyBooks(){
                 {
                     books.map((item) =>
                         <div className="float-left" >
+                            <div className="borrowedDate">
+                                <p>borrowed {item.borrowed_date}</p>
+                            </div>
                         <div className="bookWrap">
                             <div className="book">
                                 <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"/>
@@ -53,6 +56,7 @@ function  MyBooks(){
                                 <h6>{item.book_title} </h6>
                                 <p>by {item.author}</p>
                             </div>
+
                         </div>
 
                     )

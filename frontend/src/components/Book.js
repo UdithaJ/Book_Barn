@@ -35,7 +35,6 @@ function Book(props){
 
     }
 
-
         function borrowBook(e) {
         e.preventDefault();
 
@@ -58,7 +57,7 @@ function Book(props){
                 alert("You have borrowed maximum number of books allowed!")
             }
 
-            else if(res.data.status=== "unknown"){
+            else if(uid == null){
 
                 alert("You are not logged In!")
                 history.push("/login");
@@ -96,7 +95,7 @@ function Book(props){
 
                            <form onSubmit={borrowBook}>
                                <button id="BtnBorrow" disabled={isDisabled()} type="submit" className="btn btn-primary">Borrow</button>
-                           </form>
+                               </form>
                         </div>
                         <div className="displayBook">
                         <img src={"http://localhost:8000/"+item.cover_image} width="300" height="450"/>
@@ -104,7 +103,7 @@ function Book(props){
                            <br/>
                         </div>
                         <h6>price: {item.price} /=</h6>
-                            <input type="text" id="status" value={item.status}/>
+                            <input type="text" disabled="true"  className="showStatus" id="status" value={item.status}/>
 
                         </div>
 

@@ -42,20 +42,19 @@ class BookController extends Controller
         return book::where('status','borrowed') -> get();
     }
 
+
+
     function borrow ( Request $req){
        $bookID =  $req -> input('id');
        $user =  $req -> input('uid');
 
-       $check = user::where('id',$req -> $user) -> first();
+       $check = User::where('id',$user) -> first();
 
        if(!$check){
-
         return response()->json(["status" => "unknown"]);
-
        }
 
        else{
-
        $borrowedBooks = book::where('borrowed_by', $user) -> get();
        $bookCount = $borrowedBooks -> count();
        if($bookCount < 2){

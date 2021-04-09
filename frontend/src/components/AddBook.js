@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import NavBar from "./NavBar";
+import AdminNavBar from "./AdminNavBar";
 
 function AddBook(){
     const  history = useHistory();
@@ -70,7 +71,7 @@ function AddBook(){
 
         <div>
 
-            <NavBar/>
+            <AdminNavBar/>
 
         <div className="col-sm-6 offset-sm-5">
             <div className="bookForm">

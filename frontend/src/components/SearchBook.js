@@ -101,7 +101,7 @@ class SearchBook extends Component{
 
                         <div className="sort">
                         <select className="custom-select" id="inputGroupSelect01" style={{width: "250px"}} onChange={this.onChangeGenre}>
-                            <option selected>Choose...</option>
+                            <option selected>Genre</option>
                             <option value="Fiction">Fiction</option>
                             <option value="Children's">Children's</option>
                             <option value="Fantasy">Fantasy</option>
@@ -111,7 +111,7 @@ class SearchBook extends Component{
                         </div>
 
                     <div className="search">
-                        <input type="text" placeholder="Search" style={{width: "450px"}} className="form-control" onChange={this.onChangeKey}/>
+                        <input type="text" placeholder="Type anything to Search" style={{width: "450px"}} className="form-control" onChange={this.onChangeKey}/>
                     </div>
 
 
