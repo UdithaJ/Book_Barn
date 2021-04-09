@@ -94,22 +94,28 @@ class SearchBook extends Component{
         return(
             <div>
 
+
+                <NavBar/>
+
                 <div>
-                    <form>
 
-                        <input type="text" onChange={this.onChangeKey}/>
-                        <select onChange={this.onChangeGenre} value="Sort">
-                            <option value="All">All</option>
-                            <option value="all">all</option>
-                            <option value="children">children</option>
+                        <div className="sort">
+                        <select className="custom-select" id="inputGroupSelect01" style={{width: "250px"}} onChange={this.onChangeGenre}>
+                            <option selected>Choose...</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Children's">Children's</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Novel">Novel</option>
+                            <option value="Translations">Translations</option>
                         </select>
+                        </div>
 
-                    </form>
+                    <div className="search">
+                        <input type="text" placeholder="Search" style={{width: "450px"}} className="form-control" onChange={this.onChangeKey}/>
+                    </div>
 
 
                 </div>
-
-                <NavBar/>
                 <div className="d-flex justify-content-center">
                     <Pagination
                         activePage={this.state.activePage}

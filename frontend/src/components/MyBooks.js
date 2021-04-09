@@ -1,18 +1,27 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios"
-import { Link } from 'react-router-dom';
 import NavBar from "./NavBar";
+import {useHistory} from "react-router-dom";
 
 
-function  AllBooks(){
+function  MyBooks(){
 
+    const  history = useHistory();
+
+    const id = (localStorage.getItem('user-id'));
+
+    if(id == null){
+
+        history.push("/login");
+
+    }
 
 
     const [books, setBooks] = useState([]);
     useEffect(() => {
         const getBooks = () => {
-            let result = axios.get("http://localhost:8000/api/books").then((res) => {
-                setBooks(res.data.data);
+            axios.get("http://localhost:8000/api/books/mybooks/"+id).then((res) => {
+                setBooks(res.data);
             }).catch((err) => {
                 console.log(err);
             })
@@ -27,7 +36,7 @@ function  AllBooks(){
     return(
         <div>
             <NavBar/>
-            <h1>Book Rack</h1>
+            <h1>My books</h1>
 
 
 
@@ -36,9 +45,7 @@ function  AllBooks(){
                         <div className="float-left" >
                         <div className="bookWrap">
                             <div className="book">
-                                <Link to ={"books/"+item.book_id}>
-                                <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"
-                               /></Link>
+                                <img className="cover" src={"http://localhost:8000/"+item.cover_image} width="180" height="160"/>
                                 <div className="spine"></div>
                             </div>
                         </div>
@@ -57,4 +64,4 @@ function  AllBooks(){
 
 }
 
-export default AllBooks;
+export default MyBooks;

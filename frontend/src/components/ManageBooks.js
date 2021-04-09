@@ -3,6 +3,8 @@ import axios from "axios"
 import { Link } from 'react-router-dom';
 import NavBar from "./NavBar";
 import Pagination from "react-js-pagination";
+import AdminNavBar from "./AdminNavBar";
+import SearchBook from "./SearchBook";
 
 class ManageBooks extends Component{
 
@@ -53,7 +55,7 @@ class ManageBooks extends Component{
         return(
             <div>
 
-                <NavBar/>
+                <AdminNavBar/>
 
                 <div className="d-flex justify-content-center">
                     <Pagination

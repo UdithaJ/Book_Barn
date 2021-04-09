@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\book;
+use App\Models\User;
 class BookController extends Controller
 {
     function addBook(Request $req){
@@ -13,17 +14,21 @@ class BookController extends Controller
         $book -> book_description = $req -> input('book_description');
         $book -> author = $req -> input('author');
         $book -> price = $req -> input('price');
-        $book -> status = $req -> input('status');
         $book -> cover_image = $req -> file('cover_image') -> store('images');
         $book -> genre = $req -> input('genre');
         $book -> save();
-        return $req -> input();
+        if($book){
+        return response()->json(["status" => "success"]);
+        }
+        else{
+            return response()->json(["status" => "failed"]);
+        }
 
     }
 
     function allBooks(){
 
-        return book::paginate(4);
+        return book::paginate(5);
     }
 
     function getoneBook(Request $req){
@@ -40,12 +45,36 @@ class BookController extends Controller
     function borrow ( Request $req){
        $bookID =  $req -> input('id');
        $user =  $req -> input('uid');
+
+       $check = user::where('id',$req -> $user) -> first();
+
+       if(!$check){
+
+        return response()->json(["status" => "unknown"]);
+
+       }
+
+       else{
+
+       $borrowedBooks = book::where('borrowed_by', $user) -> get();
+       $bookCount = $borrowedBooks -> count();
+       if($bookCount < 2){
        $date  = date("Y/m/d");
        $book = book::where('book_id', $bookID)->update(array('status' => 'borrowed','borrowed_by' => $user,'borrowed_date' => $date));
-      if($book){
-       return "success";
-      }
+       if($book){
+        return response()->json(["status" => "success"]);
+        }
+        else{
+            return response()->json(["status" => "failed"]);
+        }
     }
+
+    else{
+
+        return response()->json(["status" => "exceeded"]);
+    }
+    }
+}
 
 
     function search(Request $req){
@@ -64,21 +93,34 @@ class BookController extends Controller
     }
 
 
+    function myBooks(Request $req){
+
+        $uid  = $req -> id;
+    
+        return book::where('borrowed_by','=',$uid) -> get();
+    }
+
 
     function return( Request $req){
         $bookID =  $req -> id;
         $book = book::where('book_id', $bookID)->update(array('status' => 'available','borrowed_by' => null,'borrowed_date' => null));
-       if($book){
-        return "success";
-       }
+        if($book){
+            return response()->json(["status" => "success"]);
+            }
+            else{
+                return response()->json(["status" => "failed"]);
+            }
      }
 
      function delete( Request $req){
         $bookID =  $req -> id;
         $book = book::where('book_id', $bookID)-> delete();
-       if($book){
-        return "success";
-       }
+        if($book){
+            return response()->json(["status" => "success"]);
+            }
+            else{
+                return response()->json(["status" => "failed"]);
+            }
      }
 
      function update( Request $req){
@@ -103,9 +145,12 @@ class BookController extends Controller
 
         }
        
-       if($book){
-        return "success";
-       }
+        if($book){
+            return response()->json(["status" => "success"]);
+            }
+            else{
+                return response()->json(["status" => "failed"]);
+            }
     
      }
 

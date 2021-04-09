@@ -1,10 +1,13 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import AdminNavBar from "./AdminNavBar";
 
 
 function UpdateBook(props){
+
+    const  history = useHistory();
 
     const [book, setBook] = useState([]);
     useEffect(() => {
@@ -16,6 +19,7 @@ function UpdateBook(props){
                 setAuthor(res.data[0].author)
                 setGenre(res.data[0].genre)
                 setPrice(res.data[0].price)
+                setStatus(res.data[0].status)
 
             }).catch((err) => {
                 console.log(err);
@@ -33,6 +37,7 @@ function UpdateBook(props){
     const [genre, setGenre] = useState("");
     const [cover_image, setCover] = useState("");
     const [price, setPrice] = useState("");
+    const [status, setStatus] = useState("");
 
     function update(e) {
         e.preventDefault();
@@ -57,20 +62,31 @@ function UpdateBook(props){
 
     function Delete(e) {
 
-
         axios.delete("http://localhost:8000/api/books/delete/"+id).then(() => {
             alert("book Deleted");
         }).catch((err) => {
             alert(err);
         })
+    }
 
+    function Return(e) {
 
+        axios.put("http://localhost:8000/api/books/return/"+id).then((res) => {
+            if(res.data.status === "success"){
+            alert("Book Returned");
+            history.push("/borrowedbooks")
+                }
+            else {
+
+            }
+        }).catch((err) => {
+            alert(err);
+        })
     }
 
     const [selectedFile, setSelectedFile] = useState()
     const [preview, setPreview] = useState()
 
-    // create a preview as a side effect, whenever selected file is changed
     useEffect(() => {
         if (!selectedFile) {
             setPreview(undefined)
@@ -83,6 +99,13 @@ function UpdateBook(props){
         // free memory when ever this component is unmounted
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
+
+
+    const isDisabled = () =>{
+
+        return status == "available"; //simplified if else
+
+    }
 
     const onSelectFile = e => {
         if (!e.target.files || e.target.files.length === 0) {
@@ -99,7 +122,7 @@ function UpdateBook(props){
 
         <div>
 
-            <NavBar/>
+            <AdminNavBar/>
 
             {
                 book.map((item) =>
@@ -151,7 +174,9 @@ function UpdateBook(props){
 
                             <button type="submit" className="btn btn-primary">Update</button>
 
-                                <button type="button"  onClick={Delete} className="btn btn-danger">Delete</button>
+                            <button type="button"  onClick={Delete} className="btn btn-danger">Delete</button>
+
+                            <button type="button" disabled={isDisabled()} onClick={Return} className="btn btn-primary">Mark as Returned</button>
 
                             <div className="spine"></div>
                         </form>

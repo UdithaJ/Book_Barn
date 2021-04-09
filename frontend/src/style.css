@@ -8,7 +8,7 @@ body {
     color: #0f6674;
 }
 .float-left{
-    margin-left: 25px;
+    margin-left: 30px;
 }
 
 .bookWrap {
@@ -158,4 +158,38 @@ textarea {
 .borrowButton:active {
     position:relative;
     top:1px;
+}
+
+.preview{
+    position: absolute;
+    float: left;
+    left: -400px;
+    top: 60px;
+}
+
+.fileInput{
+    position: absolute;
+    float: left;
+    left: -420px;
+    top: 430px;
+}
+.bookForm{
+    position: absolute;
+    top: 80px;
+    width: 600px;
+
+}
+
+.sort{
+    position: absolute;
+    top: 10px;
+    left: 600px;
+
+}
+
+.search{
+    position: absolute;
+    top: 10px;
+    left: 900px;
+
 }

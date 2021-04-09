@@ -28,20 +28,8 @@ function NavBar(){
                     <li className="nav-item active">
                         <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/add">Add Books</a>
-                    </li>
-                    <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            All Books
-                        </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a className="dropdown-item" href="#">Novals</a>
-                            <a className="dropdown-item" href="#">Children</a>
-                            <a className="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
+
+
                     <li className="nav-item">
                         <a className="nav-link" href="/signup">Sign Up</a>
                     </li>
@@ -49,8 +37,13 @@ function NavBar(){
                         <a className="nav-link" href="/login">Login</a>
                     </li>
 
+
                     <li className="nav-item">
-                        <a className="nav-link" href="/borrowedbooks">Manage Books</a>
+                        <a className="nav-link" href="/mybooks">My Books</a>
+                    </li>
+
+                    <li className="nav-item">
+                        <a className="nav-link" href="/search">Search Books</a>
                     </li>
 
                     <li className="nav-item dropdown">
@@ -63,16 +56,10 @@ function NavBar(){
                         </div>
 
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/search">Search Books</a>
-                    </li>
 
 
                 </ul>
-                <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+
             </div>
         </nav>
     )

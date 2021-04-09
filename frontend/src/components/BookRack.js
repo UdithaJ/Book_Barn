@@ -23,8 +23,9 @@ class BookRack extends Component{
     componentDidMount() {
 
         axios.get("http://localhost:8000/api/books").then((res) => {
-            console.log(res.data.data);
+
             this.setState({books:res.data.data}
+
             );
         }).catch((err) => {
             console.log(err);
@@ -71,6 +72,8 @@ class BookRack extends Component{
 
                 <NavBar/>
 
+                <h1>Book Rack</h1>
+
                 <div className="d-flex justify-content-center">
                     <Pagination
                         activePage={this.state.activePage}
@@ -80,6 +83,7 @@ class BookRack extends Component{
                         onChange={this.handlePageChange.bind(this)}
                         itemClass= 'page-item'
                         linkClass= 'page-link'
+
                     />
                 </div>
 

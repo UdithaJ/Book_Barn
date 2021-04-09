@@ -1,19 +1,23 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
-import {Link, withRouter} from "react-router-dom";
+import {Link, useHistory, withRouter} from "react-router-dom";
 import NavBar from "./NavBar";
 
 function Book(props){
+    const  history = useHistory();
 
     const [book, setBook] = useState([]);
+    const [status, setStatus] = useState([]);
+
+
     useEffect(() => {
         const getBook = () => {
             let result = axios.get("http://localhost:8000/api/books/"+props.match.params.id).then((res) => {
                 setBook(res.data);
-               // console.log(res.data[0].borrowed_date);
-                if (res.data[0].status === "borrowed"){
-                    alert("borrowed");
-                }
+                setStatus(res.data[0].status);
+                console.log(res.data[0].status);
+
+
             }).catch((err) => {
                 console.log(err);
             })
@@ -25,8 +29,14 @@ function Book(props){
     const id = props.match.params.id;
     const uid = (localStorage.getItem('user-id'));
 
+    const isDisabled = () =>{
 
-    function borrowBook(e) {
+        return status == "borrowed";
+
+    }
+
+
+        function borrowBook(e) {
         e.preventDefault();
 
         const formData = new FormData();
@@ -37,14 +47,33 @@ function Book(props){
         console.log(id);
         console.log(uid);
 
-        axios.post("http://localhost:8000/api/borrow",formData).then(() => {
-            alert("book borrowed");
+        axios.post("http://localhost:8000/api/borrow",formData).then((res) => {
+            console.log(res.data.status);
+            if(res.data.status === "success") {
+                history.push("/mybooks");
+            }
+
+            else if(res.data.status=== "exceeded"){
+
+                alert("You have borrowed maximum number of books allowed!")
+            }
+
+            else if(res.data.status=== "unknown"){
+
+                alert("You are not logged In!")
+                history.push("/login");
+            }
+            else {
+                alert("Something went wrong");
+            }
         }).catch((err) => {
             alert(err);
         })
 
 
     }
+
+
 
 
 
@@ -66,7 +95,7 @@ function Book(props){
                             </textarea>
 
                            <form onSubmit={borrowBook}>
-                               <button type="submit" className="btn btn-primary">Borrow</button>
+                               <button id="BtnBorrow" disabled={isDisabled()} type="submit" className="btn btn-primary">Borrow</button>
                            </form>
                         </div>
                         <div className="displayBook">
@@ -75,6 +104,8 @@ function Book(props){
                            <br/>
                         </div>
                         <h6>price: {item.price} /=</h6>
+                            <input type="text" id="status" value={item.status}/>
+
                         </div>
 
 
@@ -83,6 +114,7 @@ function Book(props){
 
                 )
             }
+
 
         </div>
 
