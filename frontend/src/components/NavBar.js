@@ -7,6 +7,7 @@ function NavBar(){
     let username = (localStorage.getItem('user-name'));
     let userid = (localStorage.getItem('user-id'));
     const [display,setDisplay] = useState("");
+    const [end,setEnd] = useState("none");
     const  history = useHistory();
 
 
@@ -15,6 +16,7 @@ useEffect(() => {
     if(username != null){
 
         setDisplay("none")
+        setEnd("")
 
     }
 
@@ -56,12 +58,12 @@ useEffect(() => {
                     </li>
 
 
-                    <li className="nav-item dropdown">
+                    <li style={{display:end }} className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {username}
                         </a>
-                        <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div  className="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a className="dropdown-item" onClick={logout}>Logout</a>
                         </div>
 
