@@ -76,7 +76,6 @@ function AddBook(){
         <div className="col-sm-6 offset-sm-5">
             <div className="bookForm">
             <form onSubmit={sendBook}>
-
                 <div className="form-group">
                     <label className="float-left">Title</label>
                     <input type="text" required="true" className="form-control" name="title" placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}/>
@@ -84,7 +83,7 @@ function AddBook(){
 
                 <div className="form-group">
                     <label className="float-left">Description</label>
-                    <textarea maxLength="300" className="form-control" onChange={(e) =>{setDescription(e.target.value)}} rows="4" cols="80"/>
+                    <textarea maxLength="300" className="form-control" onChange={(e) =>{setDescription(e.target.value)}} />
 
 
                 </div>
