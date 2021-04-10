@@ -1,13 +1,14 @@
 import React,{useState} from "react";
 import axios from "axios";
 import NavBar from "./NavBar";
+import {useHistory} from 'react-router-dom';
 
 function SignUp(){
 
     const [username, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const  history = useHistory();
 
     function sendUser(e) {
         e.preventDefault();
@@ -17,8 +18,14 @@ function SignUp(){
         formData.append("email",email);
         formData.append("password",password);
 
-        axios.post("http://localhost:8000/api/signup",formData).then(() => {
-            alert("Registered");
+        axios.post("http://localhost:8000/api/signup",formData).then((res) => {
+            if(res.data.status === "success") {
+                alert("Registered");
+                history.push("/login")
+            }
+            else{
+                alert("Registration Failed!");
+            }
         }).catch((err) => {
             alert(err);
         })
@@ -31,7 +38,10 @@ function SignUp(){
 
             <NavBar/>
 
+
         <div className="signup">
+            <h2>Sign Up</h2>
+            <div><br/></div>
             <form onSubmit={sendUser}>
 
                 <div className="form-group">

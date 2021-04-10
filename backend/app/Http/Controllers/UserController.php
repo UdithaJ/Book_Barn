@@ -15,7 +15,12 @@ class UserController extends Controller
         $user -> email = $req -> input("email");
         $user -> password = Hash::make($req -> input("password"));
         $user -> save();
-        return $req -> input();
+        if($user){
+            return response()->json(["status" => "success"]);
+            }
+            else{
+                return response()->json(["status" => "failed"]);
+            }
     }
 
     function login(Request $req){
